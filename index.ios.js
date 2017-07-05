@@ -9,14 +9,16 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  Navigator,
   View,
   Animated,
   ScrollView
 } from 'react-native';
 
+import { StackNavigator } from 'react-navigation';
+
 import Search from './App/Components/Search';
 import Main from './App/Components/Main';
+import SignUp from './App/Components/SignUp';
 import * as firebase from 'firebase';
 import Firebase from './App/Lib/firebase';
 import Octocat from "./octocat.png";
@@ -72,35 +74,12 @@ export default class FirstRNProject extends Component {
     })
   }
 
-  configureScene(route){
-    if(route.sceneConfig) {
-      return route.sceneConfig
-    } else {
-      return ({
-        ...Navigator.SceneConfigs.HorizontalSwipeJumpRight,
-        gesture: {}
-      });
-    }
-
-  }
-  renderScene(route, navigator) {
-    var globalProps = {navigator}
-    switch(route.id) {
-     case 'Search':
-      return (
-        <Search navigator={navigator}/>
-      )
-     case 'Main':
-      return (
-        <Login navigator={navigator}/>
-      )
-    }
-  }
   // componentWillMount() {
   //   this.animated = new Animated.Value(0);
   // }
 
   render() {
+    const { navigate } = this.props.navigation;
 
     // const hideImageInterpolate = this.animated.interpolate({
     //   inputRange: [0, 250],
@@ -136,19 +115,21 @@ export default class FirstRNProject extends Component {
 
     if (this.state.userLoaded) {
       return (
-        <Navigator
-          initialRoute={{
-            id: this.state.initialView
-          }}
-          renderScene={this.renderScene}
-          configureScene={this.configureScene}
-          />
+        <View>
+          <Text> Hello! </Text>
+          <Button
+          onPress={() => navigate('Main')}
+          title= "Login"/>
+          </View>
       );
-    } else {
-      return null
     }
   }
 }
 
+FirstRNProject = StackNavigator({
+  Main: { screen: Main},
+  SignUp: { screen: SignUp},
+  Search: { screen: Search}
+})
 
 AppRegistry.registerComponent('FirstRNProject', () => FirstRNProject);

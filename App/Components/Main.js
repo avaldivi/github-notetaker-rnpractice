@@ -84,6 +84,7 @@ class Main extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       
       <Image
@@ -151,7 +152,7 @@ class Main extends Component {
           <View style={styles.bottomContainer}>
             <TouchableOpacity activeOpacity={.5}>
             <Text
-            onPress={this.createNewAccount.bind(this)} 
+            onPress={() => navigate('SignUp')}
             style={styles.forgotPasswordText}>Create new account.
             </Text>
             </TouchableOpacity>

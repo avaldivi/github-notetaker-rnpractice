@@ -92,7 +92,7 @@ export default class FirstRNProject extends Component {
       )
      case 'Main':
       return (
-        <Main navigator={navigator}/>
+        <Login navigator={navigator}/>
       )
     }
   }

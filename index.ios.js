@@ -54,6 +54,10 @@ export default class FirstRNProject extends Component {
     }
 
     this.getInitialView = this.getInitialView.bind(this);
+  }
+
+  componentDidMount() {
+    firebase.initializeApp(Firebase.config())
     this.getInitialView();
   }
 

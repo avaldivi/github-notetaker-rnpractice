@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 var api = require('../Utils/api');
 var Dashboard = require('./Dashboard')
-var Header = require('./Header')
+var Header = require('./Helpers/Header')
 
 import {
   View,

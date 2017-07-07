@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 var api = require('../Utils/api');
 var Dashboard = require('./Dashboard')
-var Header = require('./Header')
-var SignUp = require('./SignUp')
+var Header = require('./Helpers/Header')
 
 import {
   View,
@@ -15,9 +14,12 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import Bkg from "./images/ghnt-background.jpg";
+import * as firebase from 'firebase';
+
+import Signup_Bkg from "./images/signup_bkg.jpg";
 import Username from "./images/username.png";
 import Password from "./images/password.png";
+import Email from "./images/email.png";
 import Github from "./images/github.png";
 
 var styles = StyleSheet.create({
@@ -74,38 +76,59 @@ var styles = StyleSheet.create({
     }
 });
 
-class Main extends Component {
+export class SignUp extends Component {
 
-  createNewAccount() {
-    this.props.navigator.push({
-      title: 'Sign Up',
-      component: SignUp
-    });
+    constructor(props){
+    super(props)
+    this.state = {
+      email: '',
+      password: '',
+      response: ''
+    }
+    //this.signUp = this.signUp.bind(this)
+  }
+
+  async signUp() {
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+      this.setState({
+        response: 'account created!'
+      })
+      setTimeout(() => {
+        navigate('Search')
+      }, 1500)
+    } catch (error) {
+      this.setState({
+        response: error.toString()
+      })
+    }
   }
 
   render() {
     const { navigate } = this.props.navigation;
+
     return (
       
       <Image
-        source={Bkg}
+        source={Signup_Bkg}
         style={[styles.background, styles.container]}
         resizeMode="cover"
       >
       <View style={styles.container}/>
         <View style={styles.wrapper}>
-          <View style={styles.inputWrap}>
+        <View style={styles.inputWrap}>
             <View style={styles.iconWrap}>
               <Image
-                source={Username}
+                source={Email}
                 style={styles.icon}
                 resizeMode="contain"
               />
             </View>
             <TextInput
-              placeholder="Username"
+              placeholder="Email Address"
               style={styles.input}
               underlineColorAndroid="transparent"
+              onChangeText={(email) => this.setState({email})}
             />
             </View>
             <View style={styles.inputWrap}>
@@ -121,14 +144,16 @@ class Main extends Component {
                 secureTextEntry
                 style={styles.input}
                 underlineColorAndroid="transparent"
+                onChangeText={(password) => this.setState({password})}
               />
             </View>
-            <TouchableOpacity activeOpacity={.5}>
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>Sign In</Text>
-              </View>
-            </TouchableOpacity>
 
+            <TouchableHighlight
+              onPress={this.signUp}
+              style={styles.button}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+            </TouchableHighlight>
+            
             <TouchableOpacity activeOpacity={.5}>
               <View style={styles.button}>
               <View style={styles.iconWrap}>
@@ -138,28 +163,23 @@ class Main extends Component {
                   resizeMode="contain"
                   />
                 </View>
-                <Text style={styles.buttonText}>Sign in With Github</Text>
+                <Text style={styles.buttonText}>Sign Up with Github</Text>
               </View>
             </TouchableOpacity>
-
             <TouchableOpacity activeOpacity={.5}>
-            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+            <Text style={styles.forgotPasswordText}>Already have an account? Sign in.</Text>
             </TouchableOpacity>
-          
-
           </View>
           <View style={styles.container}/>
           <View style={styles.bottomContainer}>
             <TouchableOpacity activeOpacity={.5}>
-            <Text
-            onPress={() => navigate('SignUp')}
-            style={styles.forgotPasswordText}>Create new account.
-            </Text>
+            <Text style={styles.forgotPasswordText}>Create new account.</Text>
             </TouchableOpacity>
         </View>
-        </Image>   
+        </Image>
+      
     );
   }
 }
 
-module.exports = Main;
+module.exports = SignUp;

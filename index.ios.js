@@ -16,11 +16,13 @@ import {
 
 import { StackNavigator } from 'react-navigation';
 
-import Search from './App/Components/Search';
-import Main from './App/Components/Main';
-import SignUp from './App/Components/SignUp';
-import * as firebase from 'firebase';
-import Firebase from './App/Lib/firebase';
+import { SignedOut } from "./App/Config/Router";
+
+import Search from './App/Screens/Search';
+import Main from './App/Screens/Main';
+import SignUp from './App/Screens/SignUp';
+//import * as firebase from 'firebase';
+//import Firebase from './App/Lib/firebase';
 import Octocat from "./octocat.png";
 
 var styles = StyleSheet.create({
@@ -48,38 +50,13 @@ var styles = StyleSheet.create({
 });
 
 export default class FirstRNProject extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      initialView : null,
-      userLoaded: false
-    }
-
-    this.getInitialView = this.getInitialView.bind(this);
-  }
-
-  componentDidMount() {
-    firebase.initializeApp(Firebase.config())
-    this.getInitialView();
-  }
-
-  getInitialView() {
-    firebase.auth().onAuthStateChanged((user) => {
-      let initialView = user ? 'Search' : 'Main'
-
-      this.setState({
-        userLoaded: true,
-        initialView
-      })
-    })
-  }
 
   // componentWillMount() {
   //   this.animated = new Animated.Value(0);
   // }
 
   render() {
-    const { navigate } = this.props.navigation;
+   
 
     // const hideImageInterpolate = this.animated.interpolate({
     //   inputRange: [0, 250],
@@ -113,23 +90,8 @@ export default class FirstRNProject extends Component {
     //   fontSize: fontInterpolate
     // }
 
-    if (this.state.userLoaded) {
-      return (
-        <View>
-          <Text> Hello! </Text>
-          <Button
-          onPress={() => navigate('Main')}
-          title= "Login"/>
-          </View>
-      );
-    }
+     return <SignedOut />; 
   }
 }
-
-FirstRNProject = StackNavigator({
-  Main: { screen: Main},
-  SignUp: { screen: SignUp},
-  Search: { screen: Search}
-})
 
 AppRegistry.registerComponent('FirstRNProject', () => FirstRNProject);

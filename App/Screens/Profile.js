@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-var Badge = require('./Badge');
-var Separator = require('./Separator');
-var Header = require('./Header')
+var Badge = require('./Helpers/Badge');
+var Separator = require('./Helpers/Separator');
+var Header = require('./Helpers/Header')
 
 
 import {

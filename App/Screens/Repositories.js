@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-var Badge = require('./Badge');
-var Separator = require('./Separator');
-var Web_View = require('./Web');
+var Badge = require('./Helpers/Badge');
+var Separator = require('./Helpers/Separator');
+var Web_View = require('./Helpers/Web');
 
 import {
   View,

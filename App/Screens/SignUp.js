@@ -111,7 +111,6 @@ export default class SignUp extends Component {
       console.log(navigation);
 
       return (
-        
         <Image
           source={Signup_Bkg}
           style={[styles.background, styles.container]}
@@ -157,7 +156,6 @@ export default class SignUp extends Component {
                 style={styles.button}>
               <Text style={styles.buttonText}>Sign Up</Text>
               </TouchableHighlight>
-              
               <TouchableOpacity activeOpacity={.5}>
                 <View style={styles.button}>
                 <View style={styles.iconWrap}>
@@ -181,7 +179,6 @@ export default class SignUp extends Component {
               </TouchableOpacity>
           </View>
           </Image>
-        
       );
     }
   }

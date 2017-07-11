@@ -11,12 +11,14 @@ import {
   Text,
   View,
   Animated,
-  ScrollView
+  ScrollView,
+  Router
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
 
-import { SignedOut } from "./App/Config/Router";
+import { createRootNavigator } from "./App/Config/Router";
+import { isSignedIn } from "./App/Config/auth";
 
 import Search from './App/Screens/Search';
 import Main from './App/Screens/Main';

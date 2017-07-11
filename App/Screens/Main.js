@@ -15,6 +15,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { onSignIn } from "../Config/auth";
+
 import Bkg from "./images/ghnt-background.jpg";
 import Username from "./images/username.png";
 import Password from "./images/password.png";
@@ -86,11 +88,13 @@ export class Main extends Component {
       password: '',
       loading: false
     }
-    //this.login = this.login.bind(this)
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    //const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
+    console.log(navigation);
+
     return (
       
       <Image

@@ -33,7 +33,8 @@ var styles = StyleSheet.create({
 	}
 });
 
-class Profile extends Component {
+export class Profile extends Component {
+
 	getRowTitle(user, item) {
 		item = (item === 'public_repos') ? item.replace('_', ' ') : item;
 		return item[0] ? item[0].toUpperCase() + item.slice(1) : item;

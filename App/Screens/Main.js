@@ -113,7 +113,7 @@ export class Main extends Component {
               />
             </View>
             <TextInput
-              value={this.state.email}
+              onChangeText={(email) => this.setState({email})}
               placeholder="Email"
               style={styles.input}
               underlineColorAndroid="transparent"
@@ -128,7 +128,7 @@ export class Main extends Component {
                 />
               </View>
               <TextInput
-                value={this.state.password}
+                onChangeText={(password) => this.setState({password})}
                 placeholder="Password"
                 secureTextEntry
                 style={styles.input}
@@ -136,7 +136,7 @@ export class Main extends Component {
               />
             </View>
             <TouchableHighlight
-              //onPress={this.login.bind(this)}
+              onPress= {() => { onSignIn().then(() => navigation.navigate("SignedIn")); }}
               style={styles.button}>
                 <Text style={styles.buttonText}>Sign In</Text>
             </TouchableHighlight>
@@ -164,7 +164,7 @@ export class Main extends Component {
           <View style={styles.bottomContainer}>
             <TouchableOpacity activeOpacity={.5}>
             <Text
-            onPress={() => navigate('SignUp')}
+            onPress={() => navigation.navigate('SignUp')}
             style={styles.forgotPasswordText}>Create new account.
             </Text>
             </TouchableOpacity>

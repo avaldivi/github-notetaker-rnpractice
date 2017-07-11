@@ -51,13 +51,34 @@ var styles = StyleSheet.create({
 
 export default class FirstRNProject extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
+  }
+
   // componentWillMount() {
   //   this.animated = new Animated.Value(0);
   // }
 
-  render() {
-   
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert("An error occurred"));
+  }
 
+  render() {
+
+    const { checkedSignIn, signedIn } = this.state;
+
+    // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
+    if (!checkedSignIn) {
+      return null;
+    }
+   
     // const hideImageInterpolate = this.animated.interpolate({
     //   inputRange: [0, 250],
     //   outputRange: [50, 0],
@@ -89,9 +110,10 @@ export default class FirstRNProject extends Component {
     // const titleStyle = {
     //   fontSize: fontInterpolate
     // }
-
-     return <SignedOut />; 
+    const Layout = createRootNavigator(signedIn);
+    return <Layout />;
+    }
   }
-}
+
 
 AppRegistry.registerComponent('FirstRNProject', () => FirstRNProject);

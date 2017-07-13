@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { onSignIn } from "../Config/auth";
+import {  GitHubProfile } from "../Config/Router";
+
+
 var api = require('../Utils/api');
 var Dashboard = require('./Dashboard')
 var Header = require('./Helpers/Header')

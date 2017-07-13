@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { StackNavigator, TabNavigator } from "react-navigation";
+import { StackNavigator, TabNavigator, DrawerNavigator } from "react-navigation";
 
 import { FontAwesome } from "react-native-vector-icons";
 
@@ -63,6 +63,12 @@ export const createRootNavigator = (signedIn = false) => {
         navigationOptions: {
           gesturesEnabled: false
         }
+      },
+      GithubProfile: {
+        screen: GithubProfile,
+        navigationOptions: {
+          gesturesEnabled: false
+        }
       }
     },
     {
@@ -73,7 +79,7 @@ export const createRootNavigator = (signedIn = false) => {
   );
 };
 
-export const GitHubProfile = StackNavigator ({
+export const GithubProfile = DrawerNavigator ({
   Dashboard: {
     screen: Dashboard,
     navigationOptions: {

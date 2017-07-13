@@ -46,6 +46,30 @@ export const SignedIn = TabNavigator({
       //  <FontAwesome name="user" size={30} color={tintColor} />
       // )
     }
+  },
+  Dashboard: {
+    screen: Dashboard,
+    navigationOptions: {
+      title: "Dashboard"
+    }
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      title: "Profile"
+    }
+  },
+  Repos: {
+    screen: Repositories,
+    navigationOptions: {
+      title: "Repositories"
+    }
+  },
+  Notes: {
+    screen: Notes,
+    navigationOptions: {
+      title: "Notes"
+    }
   }
 });
 
@@ -73,30 +97,7 @@ export const createRootNavigator = (signedIn = false) => {
   );
 };
 
-export const GitHubProfile = StackNavigator ({
-  Dashboard: {
-    screen: Dashboard,
-    navigationOptions: {
-      title: "Dashboard"
-    }
-  },
-  Profile: {
-    screen: Profile,
-    navigationOptions: {
-      title: "Profile"
-    }
-  },
-  Repos: {
-    screen: Repositories,
-    navigationOptions: {
-      title: "Repositories"
-    }
-  },
-  Notes: {
-    screen: Notes,
-    navigationOptions: {
-      title: "Notes"
-    }
-  }
+// export const GitHubProfile = StackNavigator ({
 
-});
+
+// });

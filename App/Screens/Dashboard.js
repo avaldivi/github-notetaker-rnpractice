@@ -91,7 +91,7 @@ class Dashboard extends Component {
 	render(){
 		return (
 			<View style={styles.container}>
-				<Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} />
+				<Image style={styles.image} />
 				<TouchableHighlight
 					style={styles.buttonProfile}
 					onPress={this.goToProfile.bind(this)}

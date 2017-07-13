@@ -47,30 +47,6 @@ export const SignedIn = TabNavigator({
       // )
     }
   },
-  Dashboard: {
-    screen: Dashboard,
-    navigationOptions: {
-      title: "Dashboard"
-    }
-  },
-  Profile: {
-    screen: Profile,
-    navigationOptions: {
-      title: "Profile"
-    }
-  },
-  Repos: {
-    screen: Repositories,
-    navigationOptions: {
-      title: "Repositories"
-    }
-  },
-  Notes: {
-    screen: Notes,
-    navigationOptions: {
-      title: "Notes"
-    }
-  }
 });
 
 export const createRootNavigator = (signedIn = false) => {
@@ -97,7 +73,29 @@ export const createRootNavigator = (signedIn = false) => {
   );
 };
 
-// export const GitHubProfile = StackNavigator ({
-
-
-// });
+export const GitHubProfile = StackNavigator ({
+  Dashboard: {
+    screen: Dashboard,
+    navigationOptions: {
+      title: "Dashboard"
+    }
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      title: "Profile"
+    }
+  },
+  Repos: {
+    screen: Repositories,
+    navigationOptions: {
+      title: "Repositories"
+    }
+  },
+  Notes: {
+    screen: Notes,
+    navigationOptions: {
+      title: "Notes"
+    }
+  }
+});

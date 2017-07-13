@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+//import { Button } 'react-native';
+
 var api = require('../Utils/api');
 var Dashboard = require('./Dashboard')
 var Header = require('./Helpers/Header')
@@ -76,9 +78,7 @@ var styles = StyleSheet.create({
       textAlign: "center"
     }
 });
-
-import * as firebase from 'firebase';
-
+//import * as firebase from 'firebase';
 export class Main extends Component {
 
   constructor(props){

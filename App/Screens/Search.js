@@ -84,6 +84,7 @@ class Search extends Component {
             isLoading: false
           })
         } else {
+          //REROUTE to the next passing github information
           this.props.navigator.push({
             title: res.name || 'Select an Option',
             component: Dashboard,
@@ -95,10 +96,8 @@ class Search extends Component {
             username: ''
           })
         }
-      });
-
-    //REROUTE to the next passing github information
-  }
+  });
+}
   render() {
     return (
       <View style={styles.mainContainer}>

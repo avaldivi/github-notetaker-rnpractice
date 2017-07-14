@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { onSignIn } from "../Config/auth";
+import {  GitHubProfile } from "../Config/Router";
+
 var Badge = require('./Helpers/Badge');
 var Separator = require('./Helpers/Separator');
 var Web_View = require('./Helpers/Web');
@@ -37,16 +40,17 @@ var styles = StyleSheet.create({
 	}
 });
 
-class Repositories extends Component {
+export class Repositories extends Component {
 	openPage(url) {
 		this.props.navigator.push({
 			component: Web_View,
 			title: 'Web View',
 			passProps: {url}
 		});
+
 	}
 	render() {
-		var repos = this.props.repos;
+		var repos = this.props.navigation.state.params.repos;
 		var list = repos.map((item, index) => {
 			var desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View/>;
 			return (
@@ -66,7 +70,7 @@ class Repositories extends Component {
 		});
 		return(
 			<ScrollView style={styles.container}>
-			<Badge userInfo={this.props.userInfo} />
+			<Badge userInfo={this.props.navigation.state.params.userInfo} />
 			{list}
 			</ScrollView>
 		)
@@ -74,8 +78,8 @@ class Repositories extends Component {
 };
 
 Repositories.propTypes = {
-	userInfo: React.PropTypes.object.isRequired,
-	repos: React.PropTypes.array.isRequired
+	//userInfo: React.PropTypes.object.isRequired,
+	//repos: React.PropTypes.array.isRequired
 }
 
 

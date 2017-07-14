@@ -71,7 +71,7 @@ constructor(props) {
 
 	goToRepos() {
 		api.getRepos(this.props.navigation.state.params.userInfo.login)
-			.then((res) => {	
+			.then((res) => {
 				this.props.navigation.navigate('Repositories', {
 					title: 'Repositories',
 					userInfo: this.props.navigation.state.params.userInfo,

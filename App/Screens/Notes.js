@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+
+import { onSignIn } from "../Config/auth";
+import {  GitHubProfile } from "../Config/Router";
+
 var Badge = require('./Helpers/Badge');
 var Separator = require('./Helpers/Separator');
 var api = require('../Utils/api');
@@ -45,41 +49,42 @@ var styles = StyleSheet.create({
 	}
 });
 
-class Notes extends Component {
-	constructor(props) {
-		super(props);
-		this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-	    this.state = {
-	      dataSource: this.ds.cloneWithRows(this.props.notes),
-	      note: '',
-	      error: ''
-	    };
+export class Notes extends Component {
+constructor(props) {
+	super(props);
+	this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: this.ds.cloneWithRows(this.props.navigation.state.params.notes),
+      note: '',
+      error: ''
+    };
 
-	}
+    console.log(this.props)
+}
+
 	handleChange(e) {
 	    this.setState({
 	      	note: e.nativeEvent.text
 	    });
   	}
-  	handleSubmit(){
-  		var note = this.state.note;
-  		this.setState({
-  			note: ''
-  		})
-  
-  	api.addNote(this.props.userInfo.login, note)
-  		.then((data) => {
-  			api.getNotes(this.props.userInfo.login)
-  			.then((data) => {
-  				this.setState({
-  					dataSource: this.ds.cloneWithRows(data)
-  				})
-  			})
-  		}).catch((err) => {
-  			console.log('Request Failed', err);
-  			this.setState({error})
-  		})
-  	}
+	handleSubmit() {
+		var note = this.props.navigation.state.params.note;
+		this.setState({
+			note: ''
+		})
+	api.addNote(this.props.navigation.state.params.userInfo.login, note)
+	.then((data) => {
+		api.getNotes(this.props.navigation.state.params.userInfo.login)
+		.then((data) => {
+			this.setState({
+				dataSource: this.ds.cloneWithRows(data)
+			})
+		})
+	}).catch((err) => {
+			console.log('Request Failed', err);
+			this.setState({error})
+		})
+	}
 
   	renderRow(rowData){
   		return(
@@ -97,7 +102,7 @@ class Notes extends Component {
   		<View style={styles.footerContainer}>
   			<TextInput
   				style={styles.searchInput}
-  				value={this.state.note}
+  				value={this.props.navigation.state.params.note}
   				onChange={this.handleChange.bind(this)}
   				placeholder="new note"/>
   				<TouchableHighlight
@@ -116,7 +121,8 @@ class Notes extends Component {
 			<ListView
 				dataSource={this.state.dataSource}
 				renderRow={this.renderRow}
-				renderHeader={() => <Badge userInfo={this.props.userInfo}/> } />
+				renderHeader={() => <Badge userInfo={this.props.navigation.state.params.userInfo} /> }
+				/>
 			{this.footer()}
 			</View>
 		)

@@ -101,7 +101,6 @@ class Search extends Component {
             isLoading: false
           })
         } else {
-          console.log(res)
           scope.props.navigation.navigate( 'Dashboard', {
             title: res.name || 'Select an Option',
             userInfo: res
@@ -116,7 +115,6 @@ class Search extends Component {
   }
 
   render() {
-    //const { navigation } = this.props; 
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}> Search for a GitHub User </Text>

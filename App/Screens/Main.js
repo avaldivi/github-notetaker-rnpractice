@@ -91,12 +91,8 @@ export class Main extends Component {
   }
 
   render() {
-    //const { navigate } = this.props.navigation;
     const { navigation } = this.props;
-    console.log(navigation);
-
     return (
-      
       <Image
         source={Bkg}
         style={[styles.background, styles.container]}

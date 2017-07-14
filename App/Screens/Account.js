@@ -1,11 +1,38 @@
 import React, { Component } from 'react';
-import { View } from "react-native";
 import { withNavigation } from 'react-navigation';
-import { Card, Button, Text } from "react-native-elements";
+import { Card, Button } from "react-native-elements";
 import { onSignOut } from "../Config/auth";
+
+import {
+  View,
+  Text,
+  ListView,
+  Image,
+  TextInput,
+  StyleSheet,
+  TouchableHighlight
+} from 'react-native';
+
+var styles = StyleSheet.create({
+  icon: {
+    height: 25,
+    width: 30
+  }
+});
 
 
 export class Account extends Component {
+
+    static navigationOptions = {
+    tabBarLabel: 'Account',
+    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('./images/account.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
 
 
   //export default ({ navigation }) => (

@@ -11,6 +11,7 @@ var Header = require('./Helpers/Header')
 import {
   View,
   Text,
+  Image,
   StyleSheet,
   TextInput,
   TouchableHighlight,
@@ -58,10 +59,26 @@ var styles = StyleSheet.create({
         marginTop: 10,
         alignSelf: 'stretch',
         justifyContent: 'center'
+    },
+    icon: {
+      height: 30,
+      width: 30
     }
 });
 
 export class Search extends Component {
+
+  static navigationOptions = {
+    tabBarLabel: 'Home',
+    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('./images/home.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
+
   constructor(props) {
     super(props);
     this.state = {

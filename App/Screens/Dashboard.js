@@ -93,7 +93,6 @@ constructor(props) {
 	}
 
 	render(){
-		//console.log(this.props);
 		return (
 			<View style={styles.container}>
 				<Image style={styles.image} source={{uri: this.props.navigation.state.params.userInfo.avatar_url}} />

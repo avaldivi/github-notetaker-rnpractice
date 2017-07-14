@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { onSignIn } from "../Config/auth";
 import {  GitHubProfile } from "../Config/Router";
 
+import PropTypes from 'prop-types';
+
 var Badge = require('./Helpers/Badge');
 var Separator = require('./Helpers/Separator');
 var api = require('../Utils/api');
@@ -130,8 +132,8 @@ constructor(props) {
 };
 
 Notes.propTypes = {
-	userInfo: React.PropTypes.object.isRequired,
-	notes: React.PropTypes.object.isRequired
+	userInfo: PropTypes.object,
+	notes: PropTypes.object
 }
 
 module.exports = Notes;

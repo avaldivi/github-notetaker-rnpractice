@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { onSignIn } from "../Config/auth";
 import {  GitHubProfile } from "../Config/Router";
 
+import PropTypes from 'prop-types';
+
 var Badge = require('./Helpers/Badge');
 var Separator = require('./Helpers/Separator');
 var Web_View = require('./Helpers/Web');
@@ -78,8 +80,8 @@ export class Repositories extends Component {
 };
 
 Repositories.propTypes = {
-	//userInfo: React.PropTypes.object.isRequired,
-	//repos: React.PropTypes.array.isRequired
+	userInfo: PropTypes.object,
+	repos: PropTypes.array
 }
 
 

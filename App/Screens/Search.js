@@ -61,7 +61,7 @@ var styles = StyleSheet.create({
     }
 });
 
-class Search extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {

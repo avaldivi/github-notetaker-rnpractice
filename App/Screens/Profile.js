@@ -41,8 +41,9 @@ export class Profile extends Component {
 		return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
 	}
 	render() {
-		var userInfo = this.props.userInfo;
-		var topicArr = ['company', 'location', 'followers', 'following', 'email', 'bio', 'public_repos'];
+		console.log(this.props)
+		var userInfo = this.props.navigation.state.params.userInfo;
+		var topicArr = ['company','location', 'followers', 'following', 'email', 'bio', 'public_repos'];
 		var list = topicArr.map((item, index) => {
 			if (!userInfo[item]) {
 				return <View key={index} />
@@ -60,7 +61,7 @@ export class Profile extends Component {
 		});
 		return (
 			<ScrollView style={styles.container}>
-				<Badge userInfo={this.props.userInfo} />
+				<Badge userInfo={this.props.navigation.state.params.userInfo} />
 				{list}
 			</ScrollView>
 		)

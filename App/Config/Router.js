@@ -92,7 +92,7 @@ export const GithubProfile = DrawerNavigator ({
       title: "Profile"
     }
   },
-  Repos: {
+  Repositories: {
     screen: Repositories,
     navigationOptions: {
       title: "Repositories"

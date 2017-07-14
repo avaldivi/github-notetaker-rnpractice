@@ -38,7 +38,7 @@ class Badge extends Component {
 	render(){
 		return (
 			<View style={styles.container}>
-				<Image style={styles.image}/>
+				<Image style={styles.image} source={{uri: this.props.userInfo.avatar_url}}/>
 					<Text style={styles.name}> {this.props.userInfo.name} </Text>
 				 	<Text style={styles.handle}> {this.props.userInfo.login} </Text>
 			</View>
@@ -47,7 +47,7 @@ class Badge extends Component {
 };
 
 Badge.propTypes = {
-	userInfo: React.PropTypes.object.isRequired
+	//userInfo: React.PropTypes.object.isRequired
 }
 
 module.exports = Badge;

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 var Badge = require('./Helpers/Badge');
 var Separator = require('./Helpers/Separator');
-var Web_View = require('./Helpers/Web');
+//var Web_View = require('./Helpers/Web');
 
 import {
   View,
@@ -43,16 +43,16 @@ var styles = StyleSheet.create({
 });
 
 export class Repositories extends Component {
-	openPage(url) {
-		this.props.navigator.push({
-			component: Web_View,
+	openPage(res) {
+		this.props.navigation.navigate('Web_View', {
 			title: 'Web View',
-			passProps: {url}
+			url: res
 		});
-
+		console.log(res)
 	}
 	render() {
 		var repos = this.props.navigation.state.params.repos;
+		console.log(repos)
 		var list = repos.map((item, index) => {
 			var desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View/>;
 			return (

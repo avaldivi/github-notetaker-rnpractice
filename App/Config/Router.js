@@ -103,5 +103,11 @@ export const GithubProfile = DrawerNavigator ({
     navigationOptions: {
       title: "Notes"
     }
+  },
+  Web_View: {
+    screen: Web_View,
+    navigationOptions: {
+      title: "WebView"
+    }
   }
 });

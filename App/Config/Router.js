@@ -11,7 +11,9 @@ import Account from "../Screens/Account";
 import Dashboard from "../Screens/Dashboard";
 import Profile from "../Screens/Profile";
 import Repositories from "../Screens/Repositories";
+import Web_View from "../Screens/Helpers/Web_View";
 import Notes from "../Screens/Notes";
+import Header from "../Screens/Helpers/Header";
 
 export const SignedOut = StackNavigator({
   SignIn: {
@@ -72,7 +74,7 @@ export const createRootNavigator = (signedIn = false) => {
       }
     },
     {
-      headerMode: "none",
+      //headerMode: "none",
       mode: "modal",
       initialRouteName: signedIn ? "SignedIn" : "SignedOut"
     }

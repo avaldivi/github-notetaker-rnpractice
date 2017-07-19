@@ -34,6 +34,9 @@ var styles = StyleSheet.create({
   icon: {
     height: 25,
     width: 30
+  },
+  hidetext: {
+    display: "none"
   }
 });
 
@@ -41,6 +44,7 @@ var styles = StyleSheet.create({
 export class Account extends Component {
 
     static navigationOptions = {
+    header: <Text style={styles.hideText}></Text>,
     tabBarLabel: 'Account',
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (

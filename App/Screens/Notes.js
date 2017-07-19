@@ -55,7 +55,10 @@ var styles = StyleSheet.create({
 export class Notes extends Component {
 	constructor(props) {
 		super(props);
-		this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+		this.ds = new ListView.DataSource({
+			rowHasChanged: (r1, r2) => r1 !== r2,
+			sectionHeaderHasChanged: (s1, s2) => s1 !== s2 }
+		);
 	    this.state = {
 	      dataSource: this.ds.cloneWithRows(this.props.navigation.state.params.notes),
 	      note: '',

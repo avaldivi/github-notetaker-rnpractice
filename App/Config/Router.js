@@ -30,26 +30,20 @@ export const SignedOut = StackNavigator({
   }
 });
 
-export const SignedIn = TabNavigator({
+export const SignedIn = TabNavigator(
+{
   Home: {
     screen: Home,
     navigationOptions: {
-      tabBarLabel: "Home",
-      //  tabBarIcon: ({ tintColor }) => (
-      //   <FontAwesome name="home" size={30} color={tintColor} />
-      // )
-    }
+      }
   },
   Account: {
     screen: Account,
     navigationOptions: {
-      tabBarLabel: "Account",
-      // tabBarIcon: ({ tintColor }) => (
-      //  <FontAwesome name="user" size={30} color={tintColor} />
-      // )
+      }
     }
-  },
-});
+  }
+);
 
 export const createRootNavigator = (signedIn = false) => {
   return StackNavigator(

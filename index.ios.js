@@ -25,7 +25,7 @@ import Main from './App/Screens/Main';
 import SignUp from './App/Screens/SignUp';
 //import * as firebase from 'firebase';
 //import Firebase from './App/Lib/firebase';
-import Octocat from "./octocat.png";
+import Header from "./App/Screens/Helpers/Header";
 
 var styles = StyleSheet.create({
   container: {

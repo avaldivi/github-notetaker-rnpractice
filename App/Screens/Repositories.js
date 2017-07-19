@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { onSignIn } from "../Config/auth";
 import {  GitHubProfile } from "../Config/Router";
 
@@ -48,11 +49,9 @@ export class Repositories extends Component {
 			title: 'Web View',
 			url: res
 		});
-		console.log(res)
 	}
 	render() {
 		var repos = this.props.navigation.state.params.repos;
-		console.log(repos)
 		var list = repos.map((item, index) => {
 			var desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View/>;
 			return (

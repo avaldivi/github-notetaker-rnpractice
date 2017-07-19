@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { onSignIn } from "../Config/auth";
 import {  GitHubProfile } from "../Config/Router";
 
@@ -52,25 +53,25 @@ var styles = StyleSheet.create({
 });
 
 export class Notes extends Component {
-constructor(props) {
-	super(props);
-	this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      dataSource: this.ds.cloneWithRows(this.props.navigation.state.params.notes),
-      note: '',
-      error: ''
-    };
-
-    console.log(this.props)
-}
+	constructor(props) {
+		super(props);
+		this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+	    this.state = {
+	      dataSource: this.ds.cloneWithRows(this.props.navigation.state.params.notes),
+	      note: '',
+	      error: ''
+	    };
+	    console.log(this.props)
+	}
 
 	handleChange(e) {
 	    this.setState({
 	      	note: e.nativeEvent.text
 	    });
   	}
+
 	handleSubmit() {
-		var note = this.props.navigation.state.params.note;
+		var note = this.state.note;
 		this.setState({
 			note: ''
 		})
@@ -86,6 +87,7 @@ constructor(props) {
 			console.log('Request Failed', err);
 			this.setState({error})
 		})
+	console.log(note)
 	}
 
   	renderRow(rowData){
@@ -104,7 +106,7 @@ constructor(props) {
   		<View style={styles.footerContainer}>
   			<TextInput
   				style={styles.searchInput}
-  				value={this.props.navigation.state.params.note}
+  				value={this.state.note}
   				onChange={this.handleChange.bind(this)}
   				placeholder="new note"/>
   				<TouchableHighlight

@@ -10,6 +10,7 @@ import {
   Text,
   ScrollView,
   StyleSheet,
+  Button,
   Animated
 } from 'react-native';
 
@@ -41,7 +42,6 @@ export class Profile extends Component {
 		return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
 	}
 	render() {
-		console.log(this.props)
 		var userInfo = this.props.navigation.state.params.userInfo;
 		var topicArr = ['company','location', 'followers', 'following', 'email', 'bio', 'public_repos'];
 		var list = topicArr.map((item, index) => {

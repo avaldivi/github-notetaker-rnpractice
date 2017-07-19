@@ -83,7 +83,7 @@ constructor(props) {
 	goToNotes() {
 		api.getNotes(this.props.navigation.state.params.userInfo.login)
 			.then((res) => {
-				res = res || {};
+				res = res || {}; //Whether there are notes or not, empty object
 				this.props.navigation.navigate('Notes', {
 					title: 'Notes',
 					userInfo: this.props.navigation.state.params.userInfo,

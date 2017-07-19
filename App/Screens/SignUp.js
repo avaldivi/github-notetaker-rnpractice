@@ -113,9 +113,7 @@ export default class SignUp extends Component {
     // }
 
     render() {
-      //const { navigate } = this.props.navigation;
       const { navigation } = this.props;
-      console.log(navigation);
 
       return (
         <Image

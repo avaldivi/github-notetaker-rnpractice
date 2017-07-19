@@ -91,12 +91,6 @@ export class Search extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  // componentWillMount() {
-  //   isSignedIn()
-  //     .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
-  //     .catch(err => alert("An error occurred"));
-  // }
-
   handleChange(event) {
     this.setState({
       username: event.nativeEvent.text

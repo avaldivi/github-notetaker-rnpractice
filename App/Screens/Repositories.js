@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 
 var Badge = require('./Helpers/Badge');
 var Separator = require('./Helpers/Separator');
-//var Web_View = require('./Helpers/Web');
 
 import {
   View,

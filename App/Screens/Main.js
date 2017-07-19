@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-//import { Button } 'react-native';
-
 var api = require('../Utils/api');
 var Dashboard = require('./Dashboard')
 var Header = require('./Helpers/Header')

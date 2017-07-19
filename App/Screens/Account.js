@@ -55,10 +55,7 @@ export class Account extends Component {
     ),
   };
 
-
-  //export default ({ navigation }) => (
   render(){
-
     const { navigation } = this.props;
 
     return(

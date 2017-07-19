@@ -62,10 +62,6 @@ export default class FirstRNProject extends Component {
     };
   }
 
-  // componentWillMount() {
-  //   this.animated = new Animated.Value(0);
-  // }
-
   componentWillMount() {
     isSignedIn()
       .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
@@ -74,48 +70,17 @@ export default class FirstRNProject extends Component {
 
   render() {
 
+    //This uses Auth.js
     const { checkedSignIn, signedIn } = this.state;
 
+    //This uses Auth.js
     // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
     if (!checkedSignIn) {
       return null;
     }
-   
-    // const hideImageInterpolate = this.animated.interpolate({
-    //   inputRange: [0, 250],
-    //   outputRange: [50, 0],
-    //   extrapolate: "clamp",
-    // })
-
-    // const fontInterpolate = this.animated.interpolate({
-    //   inputRange: [0, 250],
-    //   outputRange: [24, 30],
-    // })
-
-    // const opacityInterpolate = this.animated.interpolate({
-    //   inputRange: [0, 250],
-    //   outputRange: [1, 0],
-    //   extrapolate: "clamp"
-    // });
-
-    // const collapseInterpolate = this.animated.interpolate({
-    //   inputRange: [0, 250],
-    //   outputRange: [50, 0],
-    //   extrapolate: "clamp"
-    // })
-
-    // const imageStyle = {
-    //   width: hideImageInterpolate,
-    //   height: hideImageInterpolate
-    // }
-
-    // const titleStyle = {
-    //   fontSize: fontInterpolate
-    // }
     const Layout = createRootNavigator(signedIn);
     return <Layout />;
     }
   }
-
 
 AppRegistry.registerComponent('FirstRNProject', () => FirstRNProject);

@@ -76,10 +76,18 @@ var styles = StyleSheet.create({
       color: "white",
       backgroundColor: "transparent",
       textAlign: "center"
+    },
+    hidetext: {
+      display: "none"
     }
 });
-//import * as firebase from 'firebase';
+import * as firebase from 'firebase';
+
 export class Main extends Component {
+
+  static navigationOptions = {
+    header: <Text style={styles.hideText}></Text>
+  };
 
   constructor(props){
     super(props)

@@ -74,10 +74,17 @@ var styles = StyleSheet.create({
       color: "white",
       backgroundColor: "transparent",
       textAlign: "center"
+    },
+    hidetext: {
+      display: "none"
     }
 });
 
 export default class SignUp extends Component {
+
+  static navigationOptions = {
+    header: <Text style={styles.hideText}></Text>
+  };
 
       constructor(props){
       super(props)

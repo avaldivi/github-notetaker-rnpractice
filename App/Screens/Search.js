@@ -69,6 +69,7 @@ var styles = StyleSheet.create({
 export class Search extends Component {
 
   static navigationOptions = {
+    header: <Header/>,
     tabBarLabel: 'Home',
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (

@@ -176,13 +176,15 @@ export default class SignUp extends Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity activeOpacity={.5}>
-              <Text style={styles.forgotPasswordText}>Already have an account? Sign in.</Text>
+              <Text style={styles.forgotPasswordText}></Text>
               </TouchableOpacity>
             </View>
             <View style={styles.container}/>
             <View style={styles.bottomContainer}>
               <TouchableOpacity activeOpacity={.5}>
-              <Text style={styles.forgotPasswordText}>Create new account.</Text>
+              <Text 
+              onPress={() => navigation.navigate('Home')}
+              style={styles.forgotPasswordText}>Already have an account? Sign in.</Text>
               </TouchableOpacity>
           </View>
           </Image>

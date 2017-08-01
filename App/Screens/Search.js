@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { onSignIn } from "../Config/auth";
+import {  GitHubProfile } from "../Config/Router";
+
+
 var api = require('../Utils/api');
 var Dashboard = require('./Dashboard')
-var Header = require('./Header')
+var Header = require('./Helpers/Header')
 
 import {
   View,
   Text,
+  Image,
   StyleSheet,
   TextInput,
   TouchableHighlight,
@@ -53,10 +59,27 @@ var styles = StyleSheet.create({
         marginTop: 10,
         alignSelf: 'stretch',
         justifyContent: 'center'
+    },
+    icon: {
+      height: 30,
+      width: 30
     }
 });
 
-class Search extends Component {
+export class Search extends Component {
+
+  static navigationOptions = {
+    header: <Header/>,
+    tabBarLabel: 'Home',
+    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('./images/home.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -64,41 +87,45 @@ class Search extends Component {
       isLoading: false,
       error: false
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
+
   handleChange(event) {
     this.setState({
       username: event.nativeEvent.text
     });
   }
+
   handleSubmit(){
     //UPDATE our IndicatorIOS spinner
     this.setState({
       isLoading: true
     });
+
+    let scope = this
     //FETCH data from github
     api.getBio(this.state.username)
       .then((res) => {
         if (res.message === 'Not found') {
-          this.setState({
+          scope.setState({
             error: 'User not found',
             isLoading: false
           })
         } else {
-          this.props.navigator.push({
+          scope.props.navigation.navigate( 'Dashboard', {
             title: res.name || 'Select an Option',
-            component: Dashboard,
-            passProps: {userInfo: res}
+            userInfo: res
           });
-          this.setState({
+          scope.setState({
             isLoading: false,
             error: false,
             username: ''
           })
         }
-      });
-
-    //REROUTE to the next passing github information
+    });
   }
+
   render() {
     return (
       <View style={styles.mainContainer}>
@@ -109,7 +136,7 @@ class Search extends Component {
           onChange={this.handleChange.bind(this)} />
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleSubmit.bind(this)}
+          onPress={() => this.handleSubmit()}
           underlayColor="white">
           <Text style={styles.buttonText}> Search </Text>
         </TouchableHighlight>

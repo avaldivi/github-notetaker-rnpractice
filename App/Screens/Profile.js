@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-var Badge = require('./Badge');
-var Separator = require('./Separator');
-var Header = require('./Header')
+
+var Badge = require('./Helpers/Badge');
+var Separator = require('./Helpers/Separator');
+var Header = require('./Helpers/Header')
 
 
 import {
@@ -9,6 +10,7 @@ import {
   Text,
   ScrollView,
   StyleSheet,
+  Button,
   Animated
 } from 'react-native';
 
@@ -33,14 +35,15 @@ var styles = StyleSheet.create({
 	}
 });
 
-class Profile extends Component {
+export class Profile extends Component {
+
 	getRowTitle(user, item) {
 		item = (item === 'public_repos') ? item.replace('_', ' ') : item;
 		return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
 	}
 	render() {
-		var userInfo = this.props.userInfo;
-		var topicArr = ['company', 'location', 'followers', 'following', 'email', 'bio', 'public_repos'];
+		var userInfo = this.props.navigation.state.params.userInfo;
+		var topicArr = ['company','location', 'followers', 'following', 'email', 'bio', 'public_repos'];
 		var list = topicArr.map((item, index) => {
 			if (!userInfo[item]) {
 				return <View key={index} />
@@ -58,7 +61,7 @@ class Profile extends Component {
 		});
 		return (
 			<ScrollView style={styles.container}>
-				<Badge userInfo={this.props.userInfo} />
+				<Badge userInfo={this.props.navigation.state.params.userInfo} />
 				{list}
 			</ScrollView>
 		)

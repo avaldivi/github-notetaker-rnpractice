@@ -9,17 +9,23 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  Navigator,
   View,
   Animated,
-  ScrollView
+  ScrollView,
+  Router
 } from 'react-native';
 
-import Search from './App/Components/Search';
-import Main from './App/Components/Main';
-import * as firebase from 'firebase';
-import Firebase from './App/Lib/firebase';
-import Octocat from "./octocat.png";
+import { StackNavigator } from 'react-navigation';
+
+import { createRootNavigator } from "./App/Config/Router";
+import { isSignedIn } from "./App/Config/auth";
+
+import Search from './App/Screens/Search';
+import Main from './App/Screens/Main';
+import SignUp from './App/Screens/SignUp';
+//import * as firebase from 'firebase';
+//import Firebase from './App/Lib/firebase';
+import Header from "./App/Screens/Helpers/Header";
 
 var styles = StyleSheet.create({
   container: {
@@ -46,109 +52,35 @@ var styles = StyleSheet.create({
 });
 
 export default class FirstRNProject extends Component {
-  constructor(props){
-    super(props)
+
+  constructor(props) {
+    super(props);
+
     this.state = {
-      initialView : null,
-      userLoaded: false
-    }
-
-    this.getInitialView = this.getInitialView.bind(this);
+      signedIn: false,
+      checkedSignIn: false
+    };
   }
 
-  componentDidMount() {
-    firebase.initializeApp(Firebase.config())
-    this.getInitialView();
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert("An error occurred"));
   }
-
-  getInitialView() {
-    firebase.auth().onAuthStateChanged((user) => {
-      let initialView = user ? 'Search' : 'Main'
-
-      this.setState({
-        userLoaded: true,
-        initialView
-      })
-    })
-  }
-
-  configureScene(route){
-    if(route.sceneConfig) {
-      return route.sceneConfig
-    } else {
-      return ({
-        ...Navigator.SceneConfigs.HorizontalSwipeJumpRight,
-        gesture: {}
-      });
-    }
-
-  }
-  renderScene(route, navigator) {
-    var globalProps = {navigator}
-    switch(route.id) {
-     case 'Search':
-      return (
-        <Search navigator={navigator}/>
-      )
-     case 'Main':
-      return (
-        <Login navigator={navigator}/>
-      )
-    }
-  }
-  // componentWillMount() {
-  //   this.animated = new Animated.Value(0);
-  // }
 
   render() {
 
-    // const hideImageInterpolate = this.animated.interpolate({
-    //   inputRange: [0, 250],
-    //   outputRange: [50, 0],
-    //   extrapolate: "clamp",
-    // })
+    //This uses Auth.js
+    const { checkedSignIn, signedIn } = this.state;
 
-    // const fontInterpolate = this.animated.interpolate({
-    //   inputRange: [0, 250],
-    //   outputRange: [24, 30],
-    // })
-
-    // const opacityInterpolate = this.animated.interpolate({
-    //   inputRange: [0, 250],
-    //   outputRange: [1, 0],
-    //   extrapolate: "clamp"
-    // });
-
-    // const collapseInterpolate = this.animated.interpolate({
-    //   inputRange: [0, 250],
-    //   outputRange: [50, 0],
-    //   extrapolate: "clamp"
-    // })
-
-    // const imageStyle = {
-    //   width: hideImageInterpolate,
-    //   height: hideImageInterpolate
-    // }
-
-    // const titleStyle = {
-    //   fontSize: fontInterpolate
-    // }
-
-    if (this.state.userLoaded) {
-      return (
-        <Navigator
-          initialRoute={{
-            id: this.state.initialView
-          }}
-          renderScene={this.renderScene}
-          configureScene={this.configureScene}
-          />
-      );
-    } else {
-      return null
+    //This uses Auth.js
+    // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
+    if (!checkedSignIn) {
+      return null;
+    }
+    const Layout = createRootNavigator(signedIn);
+    return <Layout />;
     }
   }
-}
-
 
 AppRegistry.registerComponent('FirstRNProject', () => FirstRNProject);

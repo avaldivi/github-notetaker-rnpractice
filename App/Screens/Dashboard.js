@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { onSignIn } from "../Config/auth";
+import {  GitHubProfile } from "../Config/Router";
+
 var Profile = require('./Profile');
 var Repositories = require('./Repositories');
 var Notes = require('./Notes');
@@ -47,51 +52,50 @@ var styles = StyleSheet.create({
 	}
 });
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
+
+constructor(props) {
+	super(props);
+	this.state = {
+	}
+   this.goToRepos = this.goToRepos.bind(this)
+   this.getNotes = this.goToNotes.bind(this)
+  }
 
 	goToProfile() {
-		this.props.navigator.push({
-			component: Profile,
+		this.props.navigation.navigate('Profile', {
 			title: 'Profile Page',
-			passProps: {userInfo: this.props.userInfo}
+			userInfo: this.props.navigation.state.params.userInfo
 		});
 	}
 
 	goToRepos() {
-		api.getRepos(this.props.userInfo.login)
+		api.getRepos(this.props.navigation.state.params.userInfo.login)
 			.then((res) => {
-				this.props.navigator.push({
-					component: Repositories,
-					title: 'Repos',
-					passProps: {
-						userInfo: this.props.userInfo,
-						repos: res
-					}
+				this.props.navigation.navigate('Repositories', {
+					title: 'Repositories',
+					userInfo: this.props.navigation.state.params.userInfo,
+					repos: res
 				});
 			});
-		
 	}
 
 	goToNotes() {
-		api.getNotes(this.props.userInfo.login)
+		api.getNotes(this.props.navigation.state.params.userInfo.login)
 			.then((res) => {
-				res = res || {};
-				this.props.navigator.push({
-					component: Notes,
+				res = res || {}; //Whether there are notes or not, empty object
+				this.props.navigation.navigate('Notes', {
 					title: 'Notes',
-					passProps: {
-						userInfo: this.props.userInfo,
-						notes: res
-					}
+					userInfo: this.props.navigation.state.params.userInfo,
+					notes: res
 				});
 			});
-
 	}
 
 	render(){
 		return (
 			<View style={styles.container}>
-				<Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} />
+				<Image style={styles.image} source={{uri: this.props.navigation.state.params.userInfo.avatar_url}} />
 				<TouchableHighlight
 					style={styles.buttonProfile}
 					onPress={this.goToProfile.bind(this)}
@@ -100,13 +104,13 @@ class Dashboard extends Component {
 				</TouchableHighlight>
 				<TouchableHighlight
 					style={styles.buttonRepos}
-					onPress={this.goToRepos.bind(this)}
+					onPress={() => this.goToRepos()}
 					underlayColor='#4888BC'>
 						<Text style={styles.buttonText}> View Repositories </Text>
 				</TouchableHighlight>
 				<TouchableHighlight
 					style={styles.buttonNotes}
-					onPress={this.goToNotes.bind(this)}
+					onPress={() => this.goToNotes()}
 					underlayColor='#4888BC'>
 						<Text style={styles.buttonText}> Take Notes </Text>
 				</TouchableHighlight>

@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-var Badge = require('./Badge');
-var Separator = require('./Separator');
+
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { onSignIn } from "../Config/auth";
+import {  GitHubProfile } from "../Config/Router";
+
+import PropTypes from 'prop-types';
+
+var Badge = require('./Helpers/Badge');
+var Separator = require('./Helpers/Separator');
 var api = require('../Utils/api');
 
 import {
@@ -45,41 +52,46 @@ var styles = StyleSheet.create({
 	}
 });
 
-class Notes extends Component {
+export class Notes extends Component {
 	constructor(props) {
 		super(props);
-		this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+		this.ds = new ListView.DataSource({
+			rowHasChanged: (r1, r2) => r1 !== r2,
+			sectionHeaderHasChanged: (s1, s2) => s1 !== s2 }
+		);
 	    this.state = {
-	      dataSource: this.ds.cloneWithRows(this.props.notes),
+	      dataSource: this.ds.cloneWithRows(this.props.navigation.state.params.notes),
 	      note: '',
 	      error: ''
 	    };
-
+	    console.log(this.props)
 	}
+
 	handleChange(e) {
 	    this.setState({
 	      	note: e.nativeEvent.text
 	    });
   	}
-  	handleSubmit(){
-  		var note = this.state.note;
-  		this.setState({
-  			note: ''
-  		})
-  
-  	api.addNote(this.props.userInfo.login, note)
-  		.then((data) => {
-  			api.getNotes(this.props.userInfo.login)
-  			.then((data) => {
-  				this.setState({
-  					dataSource: this.ds.cloneWithRows(data)
-  				})
-  			})
-  		}).catch((err) => {
-  			console.log('Request Failed', err);
-  			this.setState({error})
-  		})
-  	}
+
+	handleSubmit() {
+		var note = this.state.note;
+		this.setState({
+			note: ''
+		})
+	api.addNote(this.props.navigation.state.params.userInfo.login, note)
+	.then((data) => {
+		api.getNotes(this.props.navigation.state.params.userInfo.login)
+		.then((data) => {
+			this.setState({
+				dataSource: this.ds.cloneWithRows(data)
+			})
+		})
+	}).catch((err) => {
+			console.log('Request Failed', err);
+			this.setState({error})
+		})
+	console.log(note)
+	}
 
   	renderRow(rowData){
   		return(
@@ -116,7 +128,8 @@ class Notes extends Component {
 			<ListView
 				dataSource={this.state.dataSource}
 				renderRow={this.renderRow}
-				renderHeader={() => <Badge userInfo={this.props.userInfo}/> } />
+				renderHeader={() => <Badge userInfo={this.props.navigation.state.params.userInfo} /> }
+				/>
 			{this.footer()}
 			</View>
 		)
@@ -124,8 +137,8 @@ class Notes extends Component {
 };
 
 Notes.propTypes = {
-	userInfo: React.PropTypes.object.isRequired,
-	notes: React.PropTypes.object.isRequired
+	userInfo: PropTypes.object,
+	notes: PropTypes.object
 }
 
 module.exports = Notes;

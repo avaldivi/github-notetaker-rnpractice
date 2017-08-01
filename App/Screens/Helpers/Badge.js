@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 import {
   View,
@@ -47,7 +47,7 @@ class Badge extends Component {
 };
 
 Badge.propTypes = {
-	userInfo: React.PropTypes.object.isRequired
+	userInfo: PropTypes.object
 }
 
 module.exports = Badge;
